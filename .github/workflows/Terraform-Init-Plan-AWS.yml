@@ -19,6 +19,11 @@ jobs:
         ref: 'main'
 #        fetch-depth: '1'
     
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_GITHUB }}
+        role-session-name: AWSCredentialsForGithubActions
+
     - name: 'Print versions'
       run: |
         aws --version
@@ -28,8 +33,6 @@ jobs:
       timeout-minutes: 20
       env:
         ENV_NAME: 'develop'
-        role-to-assume: ${{ secrets.AWS_ROLE_GITHUB }}
-        role-session-name: AWSCredentialsForGithubActions
       run: |
         chmod +x ./terraform-init-plan.sh
         ./terraform-init-plan.sh
