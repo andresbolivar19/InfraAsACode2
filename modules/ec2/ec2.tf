@@ -34,9 +34,10 @@ resource "aws_security_group" "security_group_ec2" {
 }
 
 resource "aws_instance" "ec2" {
-  ami               = var.ami
-  instance_type     = var.instance_type
-  key_name          = var.key_name
+  ami                     = var.ami
+  instance_type           = var.instance_type
+  key_name                = var.key_name
+  vpc_security_group_ids  = [aws_security_group.security_group_ec2.id]
 
   tags = {
     Name = var.name_ec2
