@@ -1,13 +1,9 @@
-locals {
-  tags = {
-    Project     = var.project
-    CreatedOn   = timestamp()
-    Environment = terraform.workspace
-    Name        = "terraform-vm"
-  }
+provider "aws" {
+  #region = "us-east-2"
+  region  = var.aws_region
 }
 
-module "ec2_instance" {
+resource "aws_instance" "web" {
   ami               = var.ami
   #availability_zone = var.availability_zone
   tags              = local.tags
