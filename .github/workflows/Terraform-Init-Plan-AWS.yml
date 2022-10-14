@@ -28,6 +28,8 @@ jobs:
       timeout-minutes: 20
       env:
         ENV_NAME: 'develop'
+        role-to-assume: ${{ secrets.AWS_ROLE_GITHUB }}
+        role-session-name: AWSCredentialsForGithubActions
       run: |
         chmod +x ./terraform-init-plan.sh
         ./terraform-init-plan.sh
