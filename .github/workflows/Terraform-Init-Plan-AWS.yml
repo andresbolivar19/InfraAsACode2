@@ -1,0 +1,25 @@
+name: Terraform-Apply-AWS
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: do-terraform-apply-aws-from-master-develop
+
+jobs:
+  Terraform-Apply-AWS:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        ref: 'master'
+        fetch-depth: '1'
+    - name: 'Print versions'
+      run: |
+        aws --version
+        terraform --version
+    - name: 'terraform init, plan'
+      timeout-minutes: 20
+      env:
+        ENV_NAME: 'develop'
+      run: |
+        ./terraform-init-plan.sh
