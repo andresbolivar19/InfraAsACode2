@@ -11,3 +11,4 @@ resource "aws_instance" "ec2" {
   instance_type     = var.instance_type
   #instance_type     = "t2.micro"
 }
+
