@@ -3,7 +3,7 @@ provider "aws" {
   region  = var.aws_region
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "ec2" {
   ami               = var.ami
   #availability_zone = var.availability_zone
   tags              = local.tags
