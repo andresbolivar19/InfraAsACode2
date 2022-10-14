@@ -7,3 +7,4 @@ variable "ami" {}
 variable "instance_type" {}
 variable "name_ec2" {}
 variable "key_name" {}
+variable "security_group" {}

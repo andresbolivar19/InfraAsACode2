@@ -1,6 +1,8 @@
-#! /bin/bash
-sudo apt-get update
-sudo apt-get install -y apache2
-sudo systemctl start apache2
-sudo systemctl enable apache2
-echo "The page was created by the user data" | sudo tee /var/www/html/index.html
+#!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+cd /var/www/html
+sudo yum install git -y
+git clone https://github.com/andresbolivar19/MyRepo.git .
