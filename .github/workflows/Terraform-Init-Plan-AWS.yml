@@ -22,7 +22,7 @@ jobs:
     - uses: aws-actions/configure-aws-credentials@v1
       with:
         role-to-assume: ${{ secrets.AWS_ROLE_GITHUB }}
-        role-session-name: AWSCredentialsForGithubActions
+        role-session-name: ${{ secrets.AWS_ROLE_GITHUB_NAME }}
         aws-region: us-east-2
 
     - name: 'Print versions'
@@ -30,10 +30,18 @@ jobs:
         aws --version
         terraform --version
 
-    - name: 'terraform init, plan'
+    - name: 'Terraform init'
       timeout-minutes: 20
       env:
         ENV_NAME: 'develop'
       run: |
-        chmod +x ./terraform-init-plan.sh
-        ./terraform-init-plan.sh
+        chmod +x ./terraform-init.sh
+        ./terraform-init.sh
+
+    - name: 'Terraform plan'
+      timeout-minutes: 20
+      env:
+        ENV_NAME: 'develop'
+      run: |
+        chmod +x ./terraform-plan.sh
+        ./terraform-plan.sh
