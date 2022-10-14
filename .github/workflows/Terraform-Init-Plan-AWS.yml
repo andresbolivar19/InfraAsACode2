@@ -29,4 +29,5 @@ jobs:
       env:
         ENV_NAME: 'develop'
       run: |
+        chmod +x ./terraform-init-plan.sh
         ./terraform-init-plan.sh
