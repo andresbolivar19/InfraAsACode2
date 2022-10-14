@@ -7,7 +7,7 @@ locals {
   }
 }
 
-module "ec2" {
+module "ec2_instance" {
   ami               = var.ami
   #availability_zone = var.availability_zone
   tags              = local.tags
