@@ -7,16 +7,23 @@ name: Terraform-Init-Plan-AWS
 
 jobs:
   Terraform-Init-Plan-AWS:
+    name: Terraform-Init-Plan-AWS
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
     - uses: actions/checkout@v1
+      name: Checkout Repository
       with:
         ref: 'main'
 #        fetch-depth: '1'
+    
     - name: 'Print versions'
       run: |
         aws --version
         terraform --version
+
     - name: 'terraform init, plan'
       timeout-minutes: 20
       env:
