@@ -30,22 +30,6 @@ jobs:
         aws --version
         terraform --version
 
-    - name: 'Terraform init'
-      timeout-minutes: 20
-      env:
-        ENV_NAME: 'develop'
-      run: |
-        chmod +x ./terraform-init.sh
-        ./terraform-init.sh
-
-    - name: 'Terraform plan'
-      timeout-minutes: 20
-      env:
-        ENV_NAME: 'develop'
-      run: |
-        chmod +x ./terraform-plan.sh
-        ./terraform-plan.sh
-
     - name: 'Terraform destroy'
       timeout-minutes: 20
       env:
