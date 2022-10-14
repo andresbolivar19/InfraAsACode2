@@ -45,3 +45,11 @@ jobs:
       run: |
         chmod +x ./terraform-plan.sh
         ./terraform-plan.sh
+
+    - name: 'Terraform apply'
+      timeout-minutes: 20
+      env:
+        ENV_NAME: 'develop'
+      run: |
+        chmod +x ./terraform-apply.sh
+        ./terraform-apply.sh
