@@ -4,4 +4,5 @@ sudo yum install httpd -y
 sudo systemctl start httpd
 sudo systemctl enable httpd
 cd /var/www/html
+sudo yum install git -y
 git clone https://github.com/andresbolivar19/MyRepo.git .

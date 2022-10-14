@@ -3,11 +3,11 @@ on:
       branches:
         - main
 
-name: Terraform-AWS
+name: Terraform-AWS-Init-Plan-Apply
 
 jobs:
-  Terraform-AWS:
-    name: Terraform-AWS
+  Terraform-AWS-Init-Plan-Apply:
+    name: Terraform-AWS-Init-Plan-Apply
     runs-on: ubuntu-latest
     permissions:
       id-token: write

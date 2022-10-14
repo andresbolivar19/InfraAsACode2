@@ -1,0 +1,55 @@
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: do-Terraform-AWS-Destroy
+
+name: Terraform-AWS-Destroy
+
+jobs:
+  Terraform-AWS-Destroy:
+    name: Terraform-AWS-Destroy
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v1
+      name: Checkout Repository
+      with:
+        ref: 'main'
+#        fetch-depth: '1'
+    
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_GITHUB }}
+        role-session-name: ${{ secrets.AWS_ROLE_GITHUB_NAME }}
+        aws-region: us-east-2
+
+    - name: 'Print versions'
+      run: |
+        aws --version
+        terraform --version
+
+    - name: 'Terraform init'
+      timeout-minutes: 20
+      env:
+        ENV_NAME: 'develop'
+      run: |
+        chmod +x ./terraform-init.sh
+        ./terraform-init.sh
+
+    - name: 'Terraform plan'
+      timeout-minutes: 20
+      env:
+        ENV_NAME: 'develop'
+      run: |
+        chmod +x ./terraform-plan.sh
+        ./terraform-plan.sh
+
+    - name: 'Terraform destroy'
+      timeout-minutes: 20
+      env:
+        ENV_NAME: 'develop'
+      run: |
+        chmod +x ./terraform-destroy.sh
+        ./terraform-destroy.sh
