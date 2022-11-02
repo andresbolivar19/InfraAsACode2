@@ -24,12 +24,16 @@ sudo chkconfig mongod on
 
 export LC_ALL=C
 
-echo -e "security:" >> /etc/mongod.conf
-echo -e "authorization: "enabled"" >> /etc/mongod.conf
-echo -e "Then run below command" >> /etc/mongod.conf
+sed -e '/bindIp/ s/^#*/#/' -i /etc/mongod.conf
 
-service mongod restart
+echo -e "db.createUser(" > /root/user.js
+echo -e "{" >> /root/user.js
+echo -e "user: "myUserAdmin"," >> /root/user.js
+echo -e "pwd: "abc123"," >> /root/user.js
+echo -e "roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]" >> /root/user.js
+echo -e "}" >> /root/user.js
+echo -e ")" >> /root/user.js
 
-echo -e "bindIp: 127.0.0.1,8.8.8.8" >> /etc/mongod.conf
+mongo < /root/user.js
 
 service mongod restart
